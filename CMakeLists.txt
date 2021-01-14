@@ -71,4 +71,8 @@ target_link_libraries(game
 
 target_link_libraries(engine rend ${LIBSDL2} ${STATIC_LIBS})
 target_link_libraries(game engine)
+<<<<<<< HEAD
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO")
+=======
+SET(CMAKE_EXE_LINKER_FLAGS    	"${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO")
+>>>>>>> 7cf6edf6ec6392d1292fe67401ea0a278e9bb5a6
