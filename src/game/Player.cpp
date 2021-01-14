@@ -6,7 +6,7 @@ namespace engine
 	void Player::onInitialize()
 	{
 		pt = getEntity()->getComponent<Renderer>()->getTransform();
-		//pr = getEntity()->getComponent<Renderer>();
+
 		pt->setPosition(rend::vec3(0, -0.9, 0));
 		pt->setScale(rend::vec3(0.4, 0.1, 1));
 		
@@ -17,7 +17,7 @@ namespace engine
 	{
 		if (getCore()->getKeyboard()->getKey('d'))
 		{
-			//move right
+			// Move right
 			if (pt->getPosition().x < 0.8)
 			{
 				pt->translate(rend::vec3(0.01f, 0, 0));
@@ -26,7 +26,7 @@ namespace engine
 
 		if (getCore()->getKeyboard()->getKey('a'))
 		{
-			//move left
+			// Move left
 			if (pt->getPosition().x > -0.8)
 			{
 				pt->translate(rend::vec3(-0.01f, 0, 0));

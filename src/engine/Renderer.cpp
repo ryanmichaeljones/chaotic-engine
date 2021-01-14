@@ -12,27 +12,28 @@ namespace engine
 	///</summary>
 	void Renderer::onInitialize()
 	{
+		// Vertex shader and fragment shader.
 		const char* src =
-			"\n#ifdef VERTEX\n						" \
-			"attribute vec2 a_Position;				" \
-			/*"uniform mat4 u_Projection;				" \*/
-			"uniform mat4 u_Model;					" \
-			"										" \
-			"void main()							" \
-			"{										" \
-			" gl_Position = u_Model * vec4(a_Position, 0, 1); " \
-			"}										" \
-			"										" \
-			"\n#endif\n								" \
-			"\n#ifdef FRAGMENT\n					" \
-			"uniform vec4 u_Color;                  " \
-			"										" \
-			"void main()							" \
-			"{										" \
-			" gl_FragColor = u_Color;		        " \
-			"}										" \
-			"										" \
-			"\n#endif\n								";		shader = getCore()->context->createShader();		shader->parse(src);		shape = getCore()->context->createBuffer();		color = rend::vec4(1, 0, 0, 1);
+			"\n#ifdef VERTEX\n									" \
+			"attribute vec2 a_Position;							" \
+			/*"uniform mat4 u_Projection;						" \*/
+			"uniform mat4 u_Model;								" \
+			"													" \
+			"void main()										" \
+			"{													" \
+			" gl_Position = u_Model * vec4(a_Position, 0, 1);	" \
+			"}													" \
+			"													" \
+			"\n#endif\n											" \
+			"\n#ifdef FRAGMENT\n								" \
+			"uniform vec4 u_Color;							    " \
+			"													" \
+			"void main()										" \
+			"{													" \
+			" gl_FragColor = u_Color;						    " \
+			"}													" \
+			"													" \
+			"\n#endif\n											";		shader = getCore()->context->createShader();		shader->parse(src);		shape = getCore()->context->createBuffer();		color = rend::vec4(1, 0, 0, 1);
 		shape->add(rend::vec2(-0.5f, 0.5f));		shape->add(rend::vec2(0.5f, -0.5f));
 		shape->add(rend::vec2(0.5f, 0.5f));
 		shape->add(rend::vec2(0.5f, -0.5f));		shape->add(rend::vec2(-0.5f, 0.5f));
@@ -52,7 +53,6 @@ namespace engine
 	///</summary>
 	void Renderer::onRender()
 	{
-		//shader->setAttribute("a_color", color);
 		shader->setAttribute("a_Position", shape);
 		/*shader->setUniform("u_Projection", rend::perspective(rend::radians(45.0f),
 			1.0f, 0.1f, 100.0f));*/

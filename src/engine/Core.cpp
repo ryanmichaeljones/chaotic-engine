@@ -12,6 +12,7 @@ namespace engine
 	///</summary>
 	std::shared_ptr<Core> Core::initialize()
 	{
+		// Initialize screen.
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
 		rtn->screen = std::make_shared<Screen>();
 		rtn->screen->setWidth(800);
@@ -37,17 +38,17 @@ namespace engine
 		}
 
 		rtn->context = rend::Context::initialize();
+
 		rtn->keyboard = std::make_shared<Keyboard>();
 
+		// Initialize audio.
 		rtn->alcDevice = alcOpenDevice(NULL);
-
 		if (!rtn->alcDevice)
 		{
 			throw Exception("Failed to open default device");
 		}
 
 		rtn->alcContext = alcCreateContext(rtn->alcDevice, NULL);
-
 		if (!rtn->alcContext)
 		{
 			alcCloseDevice(rtn->alcDevice);
@@ -151,13 +152,8 @@ namespace engine
 			keyboard->upKeys.clear();
 		}
 
-
 		alcMakeContextCurrent(NULL);
         alcDestroyContext(alcContext);
 		alcCloseDevice(alcDevice);
-
-		/*SDL_GL_DeleteContext(glContext);
-		SDL_DestroyWindow(window);
-		SDL_Quit();*/
 	}
 }
