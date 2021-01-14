@@ -15,28 +15,49 @@ link_directories(
   ${PROJECT_SOURCE_DIR}/contrib/OpenAL-soft/lib
 )
 
-set(CMAKE_VS_SDK_INCLUDE_DIRECTORIES 
-  $(VC_IncludePath);
-  $(WindowsSDK_IncludePath);
-  ${PROJECT_SOURCE_DIR}/contrib/gnu-cygwin-x86_64/include;
-  ${PROJECT_SOURCE_DIR}/contrib/SDL2/include;
-  ${PROJECT_SOURCE_DIR}/contrib/stb;
-  ${PROJECT_SOURCE_DIR}/contrib/OpenAL-soft/include;
+add_executable(game
+  src/game/main.cpp
+  src/game/engine.h
+  src/game/Player.cpp
+  src/game/Player.h
+  src/game/TestScene.cpp
+  src/game/TestScene.h
 )
-set(CMAKE_VS_SDK_LIBRARY_DIRECTORIES
-  $(VC_LibraryPath_x86);
-  $(WindowsSDK_LibraryPath_x86);
-  ${PROJECT_SOURCE_DIR}/contrib/gnu-cygwin-x86_64/lib;
-  ${PROJECT_SOURCE_DIR}/contrib/SDL2/lib/x86;
-  ${PROJECT_SOURCE_DIR}/contrib/OpenAL-soft/lib;
+  
+add_library(engine
+  src/engine/Core.cpp
+  src/engine/Core.h
+  src/engine/Entity.cpp
+  src/engine/Entity.h
+  src/engine/Component.cpp
+  src/engine/Component.h
+  src/engine/Renderer.cpp
+  src/engine/Renderer.h
+  src/engine/Exception.cpp
+  src/engine/Exception.h
+  src/engine/Transform.cpp
+  src/engine/Transform.h
+  src/engine/Texture.cpp
+  src/engine/Texture.h
+  src/engine/Keyboard.cpp
+  src/engine/Keyboard.h
+  src/engine/Screen.cpp
+  src/engine/Screen.h
+  src/engine/Sound.cpp
+  src/engine/Sound.h
+  src/engine/SoundSource.cpp
+  src/engine/SoundSource.h
 )
 
-add_executable(game WIN32
-src/game/main.cpp
-src/game/Player.cpp
-src/game/Player.h
-src/game/TestScene.cpp
-src/game/TestScene.h
+add_library(rend
+  src/rend/Exception.cpp
+  src/rend/Context.cpp
+  src/rend/Texture.cpp
+  src/rend/RenderTexture.cpp
+  src/rend/Shader.cpp
+  src/rend/Buffer.cpp
+  src/rend/Mesh.cpp
+  src/rend/Util.cpp
 )
 
 target_link_libraries(game 
@@ -47,38 +68,7 @@ target_link_libraries(game
   glew32s.lib;
   OpenAL32.lib;
 )
-  
-
-add_library(engine
-src/engine/Core.cpp
-src/engine/Core.h
-src/engine/Entity.cpp
-src/engine/Entity.h
-src/engine/Component.cpp
-src/engine/Component.h
-src/engine/Renderer.cpp
-src/engine/Renderer.h
-src/engine/Exception.cpp
-src/engine/Exception.h
-src/engine/Transform.cpp
-src/engine/Transform.h
-src/engine/Texture.cpp
-src/engine/Texture.h
-src/engine/Keyboard.cpp
-src/engine/Keyboard.h
-)
-
-add_library(rend
-src/rend/Exception.cpp
-src/rend/Context.cpp
-src/rend/Texture.cpp
-src/rend/RenderTexture.cpp
-src/rend/Shader.cpp
-src/rend/Buffer.cpp
-src/rend/Mesh.cpp
-src/rend/Util.cpp
-)
 
 target_link_libraries(engine rend ${LIBSDL2} ${STATIC_LIBS})
 target_link_libraries(game engine)
-target_link_libraries(game PUBLIC "-SAFESEH:NO")
+SET(CMAKE_EXE_LINKER_FLAGS    	"${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO")

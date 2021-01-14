@@ -13,5 +13,6 @@ namespace engine
 		void onTick();
 
 		std::shared_ptr<Transform> pt;
+		//std::shared_ptr<Renderer> pr;
 	};
 }

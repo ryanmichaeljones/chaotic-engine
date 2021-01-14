@@ -11,6 +11,7 @@ namespace engine
 	struct Renderer;
 	struct Entity;
 	struct Keyboard;
+	struct Screen;
 
 	struct Core
 	{
@@ -23,6 +24,7 @@ namespace engine
 		std::shared_ptr<Entity> addEntity();
 		std::shared_ptr<rend::Context> context;
 		std::shared_ptr<Keyboard> getKeyboard();
+		std::shared_ptr<Screen> getScreen();
 
 	private:
 		std::vector<std::shared_ptr<Entity>> entities;
@@ -32,6 +34,7 @@ namespace engine
 		ALCdevice* alcDevice;
 		ALCcontext* alcContext;
 		std::shared_ptr<Keyboard> keyboard;
+		std::shared_ptr<Screen> screen;
 	};
 
 }

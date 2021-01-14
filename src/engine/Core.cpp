@@ -3,12 +3,20 @@
 #include "Exception.h"
 #include "Transform.h"
 #include "Keyboard.h"
+#include "Screen.h"
 
 namespace engine 
 {
+	///<summary>
+	/// Initializes graphics components for OpenGL and audio for OpenAL.
+	///</summary>
 	std::shared_ptr<Core> Core::initialize()
 	{
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
+		rtn->screen = std::make_shared<Screen>();
+		rtn->screen->setWidth(800);
+		rtn->screen->setHeight(600);
+
 		rtn->self = rtn;
 
 		rtn->window = SDL_CreateWindow("engine",
@@ -31,7 +39,7 @@ namespace engine
 		rtn->context = rend::Context::initialize();
 		rtn->keyboard = std::make_shared<Keyboard>();
 
-		/*rtn->alcDevice = alcOpenDevice(NULL);
+		rtn->alcDevice = alcOpenDevice(NULL);
 
 		if (!rtn->alcDevice)
 		{
@@ -51,11 +59,14 @@ namespace engine
 			alcDestroyContext(rtn->alcContext);
 			alcCloseDevice(rtn->alcDevice);
 			throw Exception("Failed to make OpenAL context current");
-		}*/
+		}
 
 		return rtn;
 	}
 
+	///<summary>
+	/// Creates a new entity with a transform component attached.
+	///</summary>
 	std::shared_ptr<Entity> Core::addEntity()
 	{
 		std::shared_ptr<Entity> rtn = std::make_shared<Entity>();
@@ -69,11 +80,25 @@ namespace engine
 		return rtn;
 	}
 
+	///<summary>
+	/// Returns a pointer to the keyboard structure.
+	///</summary>
 	std::shared_ptr<Keyboard> Core::getKeyboard()
 	{
 		return keyboard;
 	}
 
+	///<summary>
+	/// Returns a pointer to the screen structure.
+	///</summary>
+	std::shared_ptr<Screen> Core::getScreen()
+	{
+		return screen;
+	}
+
+	///<summary>
+	/// Calls the event loop and renders all entities to the window.
+	///</summary>
 	void Core::start()
 	{
 		bool running = true;
@@ -127,9 +152,9 @@ namespace engine
 		}
 
 
-		/*alcMakeContextCurrent(NULL);
+		alcMakeContextCurrent(NULL);
         alcDestroyContext(alcContext);
-		alcCloseDevice(alcDevice);*/
+		alcCloseDevice(alcDevice);
 
 		/*SDL_GL_DeleteContext(glContext);
 		SDL_DestroyWindow(window);
