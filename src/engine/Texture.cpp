@@ -16,10 +16,7 @@ namespace engine
 	{
 		setTexturePath(texturePath);
 
-<<<<<<< HEAD
 		// Vertex shader and fragment shader.
-=======
->>>>>>> 7cf6edf6ec6392d1292fe67401ea0a278e9bb5a6
 		const char* src =
 			"\n#ifdef VERTEX\n									" \
 			"uniform mat4 in_Projection;						" \

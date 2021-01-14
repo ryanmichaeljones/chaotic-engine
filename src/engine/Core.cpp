@@ -12,10 +12,7 @@ namespace engine
 	///</summary>
 	std::shared_ptr<Core> Core::initialize()
 	{
-<<<<<<< HEAD
 		// Initialize screen.
-=======
->>>>>>> 7cf6edf6ec6392d1292fe67401ea0a278e9bb5a6
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
 		rtn->screen = std::make_shared<Screen>();
 		rtn->screen->setWidth(800);
@@ -41,28 +38,19 @@ namespace engine
 		}
 
 		rtn->context = rend::Context::initialize();
-<<<<<<< HEAD
 
 		rtn->keyboard = std::make_shared<Keyboard>();
 
 		// Initialize audio.
 		rtn->alcDevice = alcOpenDevice(NULL);
-=======
-		rtn->keyboard = std::make_shared<Keyboard>();
 
-		rtn->alcDevice = alcOpenDevice(NULL);
-
->>>>>>> 7cf6edf6ec6392d1292fe67401ea0a278e9bb5a6
 		if (!rtn->alcDevice)
 		{
 			throw Exception("Failed to open default device");
 		}
 
 		rtn->alcContext = alcCreateContext(rtn->alcDevice, NULL);
-<<<<<<< HEAD
-=======
 
->>>>>>> 7cf6edf6ec6392d1292fe67401ea0a278e9bb5a6
 		if (!rtn->alcContext)
 		{
 			alcCloseDevice(rtn->alcDevice);
@@ -166,19 +154,8 @@ namespace engine
 			keyboard->upKeys.clear();
 		}
 
-<<<<<<< HEAD
 		alcMakeContextCurrent(NULL);
         alcDestroyContext(alcContext);
 		alcCloseDevice(alcDevice);
-=======
-
-		alcMakeContextCurrent(NULL);
-        alcDestroyContext(alcContext);
-		alcCloseDevice(alcDevice);
-
-		/*SDL_GL_DeleteContext(glContext);
-		SDL_DestroyWindow(window);
-		SDL_Quit();*/
->>>>>>> 7cf6edf6ec6392d1292fe67401ea0a278e9bb5a6
 	}
 }
