@@ -1,13 +1,14 @@
 #ifndef ENGINE_H
 
-#include "engine/Core.h"
-#include "engine/Entity.h"
-#include "engine/Component.h"
-#include "engine/Renderer.h"
-#include "engine/Texture.h"
-#include "engine/Transform.h"
-#include "engine/Screen.h"
+#include "chaotic-engine/Core.h"
+#include "chaotic-engine/Entity.h"
+#include "chaotic-engine/Component.h"
+#include "chaotic-engine/Screen.h"
+#include "chaotic-engine/Camera.h"
+#include "chaotic-engine/Transform.h"
+#include "chaotic-engine/Renderer.h"
+#include "chaotic-engine/Texture.h"
 
 using namespace engine;
 
-#endif
+#endif 

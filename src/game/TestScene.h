@@ -1,1 +1,6 @@
-#pragma once
+struct TestScene
+{
+public:
+	void Scene();
+
+};

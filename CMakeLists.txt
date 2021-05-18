@@ -1,52 +1,51 @@
 cmake_minimum_required(VERSION 2.6)
-project(engine)
+project(CHAOTIC-ENGINE)
 
-include_directories(src
+include_directories(
+  ${PROJECT_SOURCE_DIR}/src
   ${PROJECT_SOURCE_DIR}/contrib/msvc-windows-x86/include
   ${PROJECT_SOURCE_DIR}/contrib/SDL2/include
   ${PROJECT_SOURCE_DIR}/contrib/stb
-  ${PROJECT_SOURCE_DIR}/contrib/OpenAL-soft/include
 )
 
 link_directories(
   ${PROJECT_SOURCE_DIR}/contrib/msvc-windows-x86/lib
   ${PROJECT_SOURCE_DIR}/contrib/SDL2/lib
   ${PROJECT_SOURCE_DIR}/contrib/stb
-  ${PROJECT_SOURCE_DIR}/contrib/OpenAL-soft/lib
 )
 
 add_executable(game
   src/game/main.cpp
-  src/game/engine.h
-  src/game/Player.cpp
-  src/game/Player.h
+  src/game/Engine.h
+  src/game/Game.cpp
+  src/game/Game.h
   src/game/TestScene.cpp
   src/game/TestScene.h
 )
-  
-add_library(engine
-  src/engine/Core.cpp
-  src/engine/Core.h
-  src/engine/Entity.cpp
-  src/engine/Entity.h
-  src/engine/Component.cpp
-  src/engine/Component.h
-  src/engine/Renderer.cpp
-  src/engine/Renderer.h
-  src/engine/Exception.cpp
-  src/engine/Exception.h
-  src/engine/Transform.cpp
-  src/engine/Transform.h
-  src/engine/Texture.cpp
-  src/engine/Texture.h
-  src/engine/Keyboard.cpp
-  src/engine/Keyboard.h
-  src/engine/Screen.cpp
-  src/engine/Screen.h
-  src/engine/Sound.cpp
-  src/engine/Sound.h
-  src/engine/SoundSource.cpp
-  src/engine/SoundSource.h
+
+add_library(chaotic-engine
+  src/chaotic-engine/Core.cpp
+  src/chaotic-engine/Core.h
+  src/chaotic-engine/Screen.cpp
+  src/chaotic-engine/Screen.h
+  src/chaotic-engine/Environment.cpp
+  src/chaotic-engine/Environment.h
+  src/chaotic-engine/Entity.cpp
+  src/chaotic-engine/Entity.h
+  src/chaotic-engine/Component.cpp
+  src/chaotic-engine/Component.h
+  src/chaotic-engine/Transform.cpp
+  src/chaotic-engine/Transform.h
+  src/chaotic-engine/Camera.cpp
+  src/chaotic-engine/Camera.h
+  src/chaotic-engine/Renderer.cpp
+  src/chaotic-engine/Renderer.h
+  src/chaotic-engine/Texture.cpp
+  src/chaotic-engine/Texture.h
+  #src/chaotic-engine/Resource.cpp
+  #src/chaotic-engine/Resource.h
+  #src/chaotic-engine/ResourceManager.cpp
+  #src/chaotic-engine/ResourceManager.h
 )
 
 add_library(rend
@@ -66,10 +65,7 @@ target_link_libraries(game
   opengl32.lib;
   glew32.lib;
   glew32s.lib;
-  OpenAL32.lib;
 )
 
-target_link_libraries(engine rend ${LIBSDL2} ${STATIC_LIBS})
-target_link_libraries(game engine)
-SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO")
-
+target_link_libraries(game chaotic-engine)
+target_link_libraries(chaotic-engine rend ${LIBSDL2} ${STATIC_LIBS})
