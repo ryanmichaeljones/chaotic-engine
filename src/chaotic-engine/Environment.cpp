@@ -2,12 +2,12 @@
 
 namespace engine
 {
-	float Environment::getDeltaTime()
+	double Environment::getDeltaTime()
 	{
 		return deltaTime;
 	}
 
-	void Environment::setDeltaTime(float time)
+	void Environment::setDeltaTime(double time)
 	{
 		this->deltaTime = time;
 	}

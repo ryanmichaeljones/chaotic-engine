@@ -3,11 +3,11 @@ namespace engine
 	struct Environment
 	{
 	public:
-		float getDeltaTime();
-		void setDeltaTime(float time);
+		double getDeltaTime();
+		void setDeltaTime(double time);
 
 	private:
-		float deltaTime;
+		double deltaTime;
 
 	};
 }

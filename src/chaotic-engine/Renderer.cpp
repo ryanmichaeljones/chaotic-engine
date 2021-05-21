@@ -42,6 +42,13 @@ namespace engine
 		shape->add(rend::vec2(0.5f, 0.5f));
 		shape->add(rend::vec2(-0.5f, -0.5f));
 		shape->add(rend::vec2(0.5f, -0.5f));
+
+		/*texCoord->add(rend::vec2(0.0f, 0.0f));
+		texCoord->add(rend::vec2(1.0f, 1.0f));
+		texCoord->add(rend::vec2(0.0f, 1.0f));
+		texCoord->add(rend::vec2(1.0f, 1.0f));
+		texCoord->add(rend::vec2(0.0f, 0.0f));
+		texCoord->add(rend::vec2(1.0f, 0.0f));*/
 	}
 
 	void Renderer::setColor(rend::vec4 color)
@@ -56,7 +63,7 @@ namespace engine
 		shader->setUniform("u_Projection", getScreen()->getPerspective());
 		shader->setUniform("u_Color", color);
 		//shader->setUniform("u_View", rend::inverse(getCore()->getCamera()->getTransform()->getModel()));
-		shader->setUniform("u_View", rend::inverse(getCore()->camera->getTransform()->getModel()));
+		shader->setUniform("u_View", rend::inverse(getCore()->getCurrentCamera()->getTransform()->getModel()));
 		
 		shader->render();
 	}

@@ -38,14 +38,16 @@ add_library(chaotic-engine
   src/chaotic-engine/Transform.h
   src/chaotic-engine/Camera.cpp
   src/chaotic-engine/Camera.h
+  src/chaotic-engine/MeshRenderer.cpp
+  src/chaotic-engine/MeshRenderer.h
   src/chaotic-engine/Renderer.cpp
   src/chaotic-engine/Renderer.h
   src/chaotic-engine/Texture.cpp
   src/chaotic-engine/Texture.h
   #src/chaotic-engine/Resource.cpp
   #src/chaotic-engine/Resource.h
-  #src/chaotic-engine/ResourceManager.cpp
-  #src/chaotic-engine/ResourceManager.h
+  src/chaotic-engine/Resources.cpp
+  src/chaotic-engine/Resources.h
 )
 
 add_library(rend

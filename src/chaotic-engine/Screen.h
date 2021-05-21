@@ -1,3 +1,4 @@
+#include <SDL.h>
 #include <rend/rend.h>
 
 namespace engine
@@ -5,12 +6,18 @@ namespace engine
 	struct Screen
 	{
 	public:
-		Screen(int screenWidth, int screenHeight) : screenWidth(screenWidth), screenHeight(screenHeight) { }
+		Screen(std::string _name, int _width, int _height);
+		SDL_Window* getWindow();
+		int getWidth();
+		int getHeight();
 		rend::mat4 getPerspective();
 		rend::mat4 getOrthographic();
 
-		int screenWidth;
-		int screenHeight;
+	private:
+		std::string name;
+		int width;
+		int height;
+		SDL_Window* window;
 
 	};
 }

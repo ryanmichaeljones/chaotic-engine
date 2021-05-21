@@ -8,17 +8,14 @@ namespace engine
 	struct Texture : public Component
 	{
 	public:
-		void onInitialize(std::string path);
-		void setPath(std::string path);
-		void onRender();
+		void onInitialize(); // default texture is loaded
+		//Texture(std::string path);
+		void loadTexture(std::string path);
+
+		std::shared_ptr<rend::Texture> texture;
 
 	private:
 		std::string path;
-		std::shared_ptr<rend::Shader> shader;
-		std::shared_ptr<rend::Mesh> mesh;
-		std::shared_ptr<rend::Buffer> shape;
-		std::shared_ptr<rend::Buffer> texCoord;
-		std::shared_ptr<rend::Texture> texture;
 
 	};
 }
