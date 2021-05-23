@@ -21,6 +21,8 @@ add_executable(game
   src/game/Game.h
   src/game/TestScene.cpp
   src/game/TestScene.h
+  src/game/CameraController.cpp
+  src/game/CameraController.h
 )
 
 add_library(chaotic-engine
@@ -30,6 +32,8 @@ add_library(chaotic-engine
   src/chaotic-engine/Screen.h
   src/chaotic-engine/Environment.cpp
   src/chaotic-engine/Environment.h
+  src/chaotic-engine/Keyboard.cpp
+  src/chaotic-engine/Keyboard.h
   src/chaotic-engine/Entity.cpp
   src/chaotic-engine/Entity.h
   src/chaotic-engine/Component.cpp
@@ -46,8 +50,8 @@ add_library(chaotic-engine
   src/chaotic-engine/Texture.h
   #src/chaotic-engine/Resource.cpp
   #src/chaotic-engine/Resource.h
-  src/chaotic-engine/Resources.cpp
-  src/chaotic-engine/Resources.h
+  #src/chaotic-engine/Resources.cpp
+  #src/chaotic-engine/Resources.h
 )
 
 add_library(rend

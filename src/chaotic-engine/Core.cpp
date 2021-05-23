@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include "Resources.h"
 #include "Environment.h"
+#include "Keyboard.h"
 
 #include <iostream>
 
@@ -16,6 +17,8 @@ namespace engine
 		rtn->self = rtn;
 
 		rtn->environment = std::make_shared<Environment>();
+
+		rtn->keyboard = std::make_shared<Keyboard>();
 
 		return rtn;
 	}
@@ -54,6 +57,11 @@ namespace engine
 		return context;
 	}
 
+	std::shared_ptr<Keyboard> Core::getKeyboard()
+	{
+		return keyboard;
+	}
+
 	std::shared_ptr<Screen> Core::getScreen()
 	{
 		return screen;
@@ -78,6 +86,25 @@ namespace engine
 				if (event.type == SDL_QUIT)
 				{
 					running = false;
+				}
+				else if (event.type == SDL_KEYDOWN)
+				{
+					keyboard->keys.push_back(event.key.keysym.sym);
+				}
+				else if (event.type == SDL_KEYUP)
+				{
+					for (std::vector<int>::iterator it = keyboard->keys.begin();
+						it != keyboard->keys.end();)
+					{
+						if (*it == event.key.keysym.sym)
+						{
+							it = keyboard->keys.erase(it);
+						}
+						else
+						{
+							it++;
+						}
+					}
 				}
 
 				for (size_t ei = 0; ei < entities.size(); ei++)

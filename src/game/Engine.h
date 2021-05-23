@@ -10,6 +10,7 @@
 #include "chaotic-engine/MeshRenderer.h"
 #include "chaotic-engine/Renderer.h"
 #include "chaotic-engine/Texture.h"
+#include "chaotic-engine/Keyboard.h"
 
 using namespace engine;
 

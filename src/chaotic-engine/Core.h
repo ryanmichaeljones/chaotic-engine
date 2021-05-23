@@ -12,6 +12,7 @@ namespace engine
 	struct Screen;
 	struct Resources;
 	struct Environment;
+	struct Keyboard;
 
 	struct Core
 	{
@@ -25,6 +26,7 @@ namespace engine
 		void setCurrentCamera(std::shared_ptr<Camera> camera);
 		std::shared_ptr<Entity> addEntity();
 		std::shared_ptr<rend::Context> getContext();
+		std::shared_ptr<Keyboard> getKeyboard();
 		std::shared_ptr<Screen> getScreen();
 		std::shared_ptr<Camera> getCurrentCamera();
 
@@ -52,7 +54,8 @@ namespace engine
 		std::shared_ptr<Camera> currentCamera;
 		std::shared_ptr<Screen> screen;
 		std::shared_ptr<Resources> resources;
-		std::shared_ptr<Environment> environment;			
+		std::shared_ptr<Environment> environment;	
+		std::shared_ptr<Keyboard> keyboard;
 		std::weak_ptr<Core> self;
 		SDL_GLContext glContext;
 
