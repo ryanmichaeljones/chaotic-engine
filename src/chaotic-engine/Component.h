@@ -9,6 +9,7 @@ namespace engine
 	struct Core;
 	struct Transform;
 	struct Screen;
+	struct Keyboard;
 
 	struct Component
 	{
@@ -24,6 +25,7 @@ namespace engine
 		std::shared_ptr<Core> getCore();
 		std::shared_ptr<Transform> getTransform();
 		std::shared_ptr<Screen> getScreen();
+		std::shared_ptr<Keyboard> getKeyboard();
 
 	private:
 		std::weak_ptr<Entity> entity;

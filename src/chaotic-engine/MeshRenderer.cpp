@@ -1,5 +1,7 @@
 #include "MeshRenderer.h"
 #include "Core.h"
+#include "Resources.h"
+#include "Texture.h"
 #include "Screen.h"
 #include "Transform.h"
 #include "Camera.h"
@@ -8,9 +10,12 @@
 
 namespace engine
 {
-	void MeshRenderer::onInitialize()
+	void MeshRenderer::onInitialize(std::string path)
 	{
-	
+		setTexture(getCore()->getResources()->load<Texture>("../src/textures/" + path));
+
+		//shader = getCore()->context->createShader();
+		//setShader(vertexShader, fragmentShader);
 	}
 
 	void MeshRenderer::onRender()
@@ -66,7 +71,7 @@ namespace engine
 		mesh->setBuffer("a_Position", shape);
 		mesh->setBuffer("a_TexCoord", texCoord);*/
 
-		std::ifstream f("../src/textures/cube.obj");
+		std::ifstream f("../src/models/cube.obj");
 		if (!f.is_open())
 		{
 			throw std::exception("Failed to open model");
@@ -86,18 +91,23 @@ namespace engine
 
 		shader->setUniform("u_Model", getTransform()->getModel());
 		shader->setUniform("u_Projection", getScreen()->getPerspective());
-		shader->setSampler("u_Texture", texture);
+		shader->setSampler("u_Texture", texture->texture);
 		shader->setUniform("u_View", rend::inverse(getCore()->getCurrentCamera()->getTransform()->getModel()));
 		shader->setMesh(mesh);
 
 		shader->render();
 	}
 
-	void MeshRenderer::setTexture(std::shared_ptr<rend::Texture> _texture)
+	void MeshRenderer::setTexture(std::shared_ptr<Texture> _texture)
 	{
-		texture = _texture;
+		this->texture = _texture;
 	}
 
-	//setMesh
-	//setShaders(vertex, fragment)
+	/*void MeshRenderer::setShader(std::string vertex, std::string fragment)
+	{
+		this->shader->parse("")
+	}*/
+
+	//setMesh ->model obj
+	//setShaders ->vertex and fragment shaders
 }

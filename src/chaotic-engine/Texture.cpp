@@ -6,19 +6,19 @@
 
 namespace engine
 {
-	void Texture::onInitialize()
+	/*void Texture::onInitialize()
 	{
 		path = "../src/textures/missingtexture.jpg";
 		loadTexture(path);
-	}
+	}*/
 
-	void Texture::loadTexture(std::string path)
+	void Texture::onLoad()
 	{
 		texture = getCore()->context->createTexture();
 
 		int w = 0, h = 0, channels = 0;
 
-		unsigned char *data = stbi_load(path.c_str(), &w, &h, &channels, 3);
+		unsigned char *data = stbi_load(getPath().c_str(), &w, &h, &channels, 3);
 
 		if (!data)
 		{

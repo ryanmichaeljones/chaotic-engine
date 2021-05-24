@@ -16,6 +16,9 @@ namespace engine
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
 		rtn->self = rtn;
 
+		rtn->resources = std::make_shared<Resources>();
+		rtn->resources->core = rtn;
+
 		rtn->environment = std::make_shared<Environment>();
 
 		rtn->keyboard = std::make_shared<Keyboard>();
@@ -50,6 +53,11 @@ namespace engine
 		entities.push_back(rtn);
 
 		return rtn;
+	}
+
+	std::shared_ptr<Resources> Core::getResources()
+	{
+		return resources;
 	}
 
 	std::shared_ptr<rend::Context> Core::getContext()

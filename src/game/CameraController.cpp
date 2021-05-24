@@ -4,20 +4,23 @@
 
 void CameraController::onTick()
 {
-	if (getCore()->getKeyboard()->getKey('s'))
+	speed = 0.04f;
+	cameraTransform = getCore()->getCurrentCamera()->getTransform();
+
+	if (getKeyboard()->getKey('s'))
 	{
-		getCore()->getCurrentCamera()->getTransform()->translate(rend::vec3(0.0f, 0.01f, 0.0f));
+		cameraTransform->translate(rend::vec3(0.0f, speed, 0.0f));
 	}
-	if (getCore()->getKeyboard()->getKey('w'))
+	if (getKeyboard()->getKey('w'))
 	{
-		getCore()->getCurrentCamera()->getTransform()->translate(rend::vec3(0.0f, -0.01f, 0.0f));
+		cameraTransform->translate(rend::vec3(0.0f, -speed, 0.0f));
 	}
-	if (getCore()->getKeyboard()->getKey('a'))
+	if (getKeyboard()->getKey('a'))
 	{
-		getCore()->getCurrentCamera()->getTransform()->translate(rend::vec3(0.01f, 0.0f, 0.0f));
+		cameraTransform->translate(rend::vec3(speed, 0.0f, 0.0f));
 	}
-	if (getCore()->getKeyboard()->getKey('d'))
+	if (getKeyboard()->getKey('d'))
 	{
-		getCore()->getCurrentCamera()->getTransform()->translate(rend::vec3(-0.01f, 0.0f, 0.0f));
+		cameraTransform->translate(rend::vec3(-speed, 0.0f, 0.0f));
 	}
 }

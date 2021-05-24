@@ -1,23 +1,46 @@
-#include <string>
-#include <memory>
+#include "Resource.h"
 
-#include <rend/rend.h>
+#include <vector>
+#include <memory>
+#include <string>
 
 namespace engine
 {
+	struct Core;
+
 	struct Resources
 	{
 	public:
-		//template <typename T>
-		//std::shared_ptr<T> load(std::string path);
-		//template <typename T>
-		//std::shared_ptr<T> create();
-		//static std::shared_ptr<Resources> initialize(std::shared_ptr<Core> core);
+		template <typename T>
+		std::shared_ptr<T> load(const std::string& path)
+		{
+			std::shared_ptr<T> rtn;
 
-		// provide a ptr to core from resources
+			for (size_t i = 0; i < resources.size(); i++)
+			{
+				if (path == resources.at(i)->getPath())
+				{
+					rtn = std::dynamic_pointer_cast<T>(resources.at(i));
+					if (!rtn) continue;
+
+					return rtn;
+				}
+			}
+
+			rtn = std::make_shared<T>();
+			rtn->core = core;
+			rtn->path = path;
+			rtn->onLoad();
+			resources.push_back(rtn);
+
+			return rtn;
+		}
 
 	private:
+		friend struct engine::Core;
 
+		std::vector<std::shared_ptr<Resource>> resources;
+		std::weak_ptr<Core> core;
 
 	};
 }

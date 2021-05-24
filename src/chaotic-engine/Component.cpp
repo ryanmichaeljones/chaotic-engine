@@ -39,4 +39,9 @@ namespace engine
 	{
 		return getEntity()->getCore()->getScreen();
 	}
+
+	std::shared_ptr<Keyboard> Component::getKeyboard()
+	{
+		return getCore()->getKeyboard();
+	}
 }

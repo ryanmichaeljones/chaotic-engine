@@ -25,6 +25,7 @@ namespace engine
 		void start();
 		void setCurrentCamera(std::shared_ptr<Camera> camera);
 		std::shared_ptr<Entity> addEntity();
+		std::shared_ptr<Resources> getResources();
 		std::shared_ptr<rend::Context> getContext();
 		std::shared_ptr<Keyboard> getKeyboard();
 		std::shared_ptr<Screen> getScreen();

@@ -11,6 +11,8 @@
 #include "chaotic-engine/Renderer.h"
 #include "chaotic-engine/Texture.h"
 #include "chaotic-engine/Keyboard.h"
+#include "chaotic-engine/Resource.h"
+//#include "chaotic-engine/Resources.h"
 
 using namespace engine;
 
