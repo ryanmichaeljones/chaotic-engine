@@ -8,25 +8,25 @@
 namespace engine
 {
 	struct Texture;
+	struct Shader;
+	struct Mesh;
 
 	struct MeshRenderer : public Component
 	{
 	public:
+		void onInitialize(std::shared_ptr<Texture> _texture, std::shared_ptr<Shader> _shader, std::shared_ptr<Mesh> _mesh);
 		void onInitialize(std::string path);
+		void onInitialize();
 		void onRender();
 
 		void setTexture(std::shared_ptr<Texture> _texture);
-		void setShader(std::string vertex, std::string fragment);
+		void setShader(std::shared_ptr<Shader> _shader);
+		void setMesh(std::shared_ptr<Mesh> _mesh);
 
 	private:
-		std::string vertexShader;
-		std::string fragmentShader;
-
 		std::shared_ptr<engine::Texture> texture;
-		std::shared_ptr<rend::Shader> shader;
-		std::shared_ptr<rend::Mesh> mesh;
-		std::shared_ptr<rend::Buffer> shape;
-		std::shared_ptr<rend::Buffer> texCoord;
+		std::shared_ptr<engine::Shader> shader;
+		std::shared_ptr<engine::Mesh> mesh;
 
 	};
 }

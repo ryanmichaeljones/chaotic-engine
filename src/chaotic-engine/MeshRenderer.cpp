@@ -2,6 +2,8 @@
 #include "Core.h"
 #include "Resources.h"
 #include "Texture.h"
+#include "Shader.h"
+#include "Mesh.h"
 #include "Screen.h"
 #include "Transform.h"
 #include "Camera.h"
@@ -10,92 +12,39 @@
 
 namespace engine
 {
+	void MeshRenderer::onInitialize(std::shared_ptr<Texture> _texture, std::shared_ptr<Shader> _shader, std::shared_ptr<Mesh> _mesh)
+	{
+		setTexture(_texture);
+		setShader(_shader);
+		setMesh(_mesh);
+	}
+
 	void MeshRenderer::onInitialize(std::string path)
 	{
 		setTexture(getCore()->getResources()->load<Texture>("../src/textures/" + path));
 
-		//shader = getCore()->context->createShader();
-		//setShader(vertexShader, fragmentShader);
+		// change to inputs
+		setShader(getCore()->getResources()->load<Shader>("../src/shaders/texture.shader"));
+		setMesh(getCore()->getResources()->load<Mesh>("../src/models/cube.obj"));
+	}
+
+	void MeshRenderer::onInitialize()
+	{
+		// Default
+		setTexture(getCore()->getResources()->load<Texture>("../src/textures/missingtexture.jpg"));
+		setShader(getCore()->getResources()->load<Shader>("../src/shaders/texture.shader")); // add a missingshader.shader
+		setMesh(getCore()->getResources()->load<Mesh>("../src/models/cube.obj")); //add a missingobj.obj
 	}
 
 	void MeshRenderer::onRender()
 	{
-		const char* src =
-			"\n#ifdef VERTEX\n															" \
-			"attribute vec3 a_Position;													" \
-			"attribute vec2 a_TexCoord;													" \
-			"attribute vec3 a_Normal;													" \
-			"uniform mat4 u_Projection;													" \
-			"uniform mat4 u_View;														" \
-			"uniform mat4 u_Model;														" \
-			"varying vec2 ex_TexCoord;													" \
-			"varying vec3 ex_Normal;													" \
-			"void main()																" \
-			"{																			" \
-			"gl_Position = u_Projection * u_View * u_Model * vec4(a_Position, 1);		" \
-			"ex_TexCoord = a_TexCoord;													" \
-			"ex_Normal = a_Normal;														" \
-			"}																			" \
-			"\n#endif\n																	" \
-			"\n#ifdef FRAGMENT\n														" \
-			"uniform sampler2D u_Texture;												" \
-			"varying vec2 ex_TexCoord;													" \
-			"varying vec3 ex_Normal;													" \
-			"void main()																" \
-			"{																			" \
-			"gl_FragColor = texture2D(u_Texture, ex_TexCoord);							" \
-			"if(gl_FragColor.x == 9) gl_FragColor.x = ex_Normal.x;						" \
-			"}																			" \
-			"\n#endif\n																	";
+		shader->getShader()->setUniform("u_Model", getTransform()->getModel());
+		shader->getShader()->setUniform("u_Projection", getScreen()->getPerspective());
+		shader->getShader()->setSampler("u_Texture", texture->getTexture());
+		shader->getShader()->setUniform("u_View", rend::inverse(getCore()->getCurrentCamera()->getTransform()->getModel()));
+		shader->getShader()->setMesh(mesh->getMesh());
 
-		shader = getCore()->context->createShader();
-		shader->parse(src);
-
-		shape = getCore()->context->createBuffer();
-		mesh = getCore()->context->createMesh();
-		texCoord = getCore()->context->createBuffer();
-
-		/*shape->add(rend::vec2(-0.5f, -0.5f));
-		shape->add(rend::vec2(0.5f, 0.5f));
-		shape->add(rend::vec2(-0.5f, 0.5f));
-		shape->add(rend::vec2(0.5f, 0.5f));
-		shape->add(rend::vec2(-0.5f, -0.5f));
-		shape->add(rend::vec2(0.5f, -0.5f));
-		texCoord->add(rend::vec2(0.0f, 0.0f));
-		texCoord->add(rend::vec2(1.0f, 1.0f));
-		texCoord->add(rend::vec2(0.0f, 1.0f));
-		texCoord->add(rend::vec2(1.0f, 1.0f));
-		texCoord->add(rend::vec2(0.0f, 0.0f));
-		texCoord->add(rend::vec2(1.0f, 0.0f));
-
-		mesh->setBuffer("a_Position", shape);
-		mesh->setBuffer("a_TexCoord", texCoord);*/
-
-		std::ifstream f("../src/models/cube.obj");
-		if (!f.is_open())
-		{
-			throw std::exception("Failed to open model");
-		}
-
-		std::string obj;
-		std::string line;
-
-		while (!f.eof())
-		{
-			std::getline(f, line);
-			obj += line + "\n";
-		}
-
-		mesh->parse(obj);
-
-
-		shader->setUniform("u_Model", getTransform()->getModel());
-		shader->setUniform("u_Projection", getScreen()->getPerspective());
-		shader->setSampler("u_Texture", texture->texture);
-		shader->setUniform("u_View", rend::inverse(getCore()->getCurrentCamera()->getTransform()->getModel()));
-		shader->setMesh(mesh);
-
-		shader->render();
+		shader->getShader()->render();
 	}
 
 	void MeshRenderer::setTexture(std::shared_ptr<Texture> _texture)
@@ -103,11 +52,13 @@ namespace engine
 		this->texture = _texture;
 	}
 
-	/*void MeshRenderer::setShader(std::string vertex, std::string fragment)
+	void MeshRenderer::setShader(std::shared_ptr<Shader> _shader)
 	{
-		this->shader->parse("")
-	}*/
+		this->shader = _shader;
+	}
 
-	//setMesh ->model obj
-	//setShaders ->vertex and fragment shaders
+	void MeshRenderer::setMesh(std::shared_ptr<Mesh> _mesh)
+	{
+		this->mesh = _mesh;
+	}
 }

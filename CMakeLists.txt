@@ -48,6 +48,10 @@ add_library(chaotic-engine
   src/chaotic-engine/Renderer.h
   src/chaotic-engine/Texture.cpp
   src/chaotic-engine/Texture.h
+  src/chaotic-engine/Shader.cpp
+  src/chaotic-engine/Shader.h
+  src/chaotic-engine/Mesh.cpp
+  src/chaotic-engine/Mesh.h
   src/chaotic-engine/Resource.cpp
   src/chaotic-engine/Resource.h
   src/chaotic-engine/Resources.h

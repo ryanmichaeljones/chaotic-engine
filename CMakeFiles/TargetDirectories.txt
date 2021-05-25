@@ -1,5 +1,0 @@
-C:/Users/Ryan/Documents/PORTFOLIO/chaotic-engine/CMakeFiles/game.dir
-C:/Users/Ryan/Documents/PORTFOLIO/chaotic-engine/CMakeFiles/chaotic-engine.dir
-C:/Users/Ryan/Documents/PORTFOLIO/chaotic-engine/CMakeFiles/rend.dir
-C:/Users/Ryan/Documents/PORTFOLIO/chaotic-engine/CMakeFiles/ALL_BUILD.dir
-C:/Users/Ryan/Documents/PORTFOLIO/chaotic-engine/CMakeFiles/ZERO_CHECK.dir

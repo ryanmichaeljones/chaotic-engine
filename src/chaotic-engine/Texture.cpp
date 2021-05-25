@@ -40,4 +40,9 @@ namespace engine
 
 		stbi_image_free(data);
 	}
+
+	std::shared_ptr<rend::Texture> Texture::getTexture()
+	{
+		return texture;
+	}
 }

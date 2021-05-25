@@ -19,12 +19,14 @@ void TestScene::Scene()
 	c_camera->getTransform()->setRotation(rend::vec3(rend::radians(-19.0f), rend::radians(25.0f), rend::radians(10.0f)));
 	c_camera->getTransform()->setPosition(rend::vec3(2.4f, 2.0f, 5.0f));
 
-	// Load a texture
+	// Load a texture, shader and mesh
 	std::shared_ptr<Texture> texture = core->getResources()->load<Texture>("../src/textures/diamondblock.png");
+	std::shared_ptr<Shader> shader = core->getResources()->load<Shader>("../src/shaders/texture.shader");
+	std::shared_ptr<Mesh> mesh = core->getResources()->load<Mesh>("../src/models/cube.obj");
 	
 	// Render cube using a texture
 	std::shared_ptr<Entity> e_renderer = core->addEntity();
-	std::shared_ptr<MeshRenderer> c_renderer = e_renderer->addComponent<MeshRenderer>("diamondblock.png");
+	std::shared_ptr<MeshRenderer> c_renderer = e_renderer->addComponent<MeshRenderer>(texture, shader, mesh);
 
 	// Translate the cube through keyboard input
 	std::shared_ptr<Entity> e_cameraController = core->addEntity();
