@@ -6,15 +6,9 @@
 
 namespace engine
 {
-	/*void Texture::onInitialize()
-	{
-		path = "../src/textures/missingtexture.jpg";
-		loadTexture(path);
-	}*/
-
 	void Texture::onLoad()
 	{
-		texture = getCore()->context->createTexture();
+		texture = getCore()->getContext()->createTexture();
 
 		int w = 0, h = 0, channels = 0;
 

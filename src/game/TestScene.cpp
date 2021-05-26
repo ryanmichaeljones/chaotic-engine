@@ -1,6 +1,6 @@
 #include "TestScene.h"
-//#include "Engine.h"
 #include "CameraController.h"
+//#include "Engine.h"
 
 #include <iostream>
 
@@ -16,8 +16,8 @@ void TestScene::Scene()
 	std::shared_ptr<Entity> e_camera = core->addEntity();
 	std::shared_ptr<Camera> c_camera = e_camera->addComponent<Camera>();
 	core->setCurrentCamera(c_camera);
-	c_camera->getTransform()->setRotation(rend::vec3(rend::radians(-19.0f), rend::radians(25.0f), rend::radians(10.0f)));
-	c_camera->getTransform()->setPosition(rend::vec3(2.4f, 2.0f, 5.0f));
+	c_camera->getTransform()->setRotation(rend::vec3(rend::radians(-20.0f), rend::radians(25.0f), rend::radians(10.0f)));
+	c_camera->getTransform()->setPosition(rend::vec3(2.5f, 2.0f, 5.0f));
 
 	// Load a texture, shader and mesh
 	std::shared_ptr<Texture> texture = core->getResources()->load<Texture>("../src/textures/diamondblock.png");
@@ -29,8 +29,8 @@ void TestScene::Scene()
 	std::shared_ptr<MeshRenderer> c_renderer = e_renderer->addComponent<MeshRenderer>(texture, shader, mesh);
 
 	// Translate the cube through keyboard input
-	std::shared_ptr<Entity> e_cameraController = core->addEntity();
-	std::shared_ptr<CameraController> c_cameraController = e_cameraController->addComponent<CameraController>();
+	std::shared_ptr<Entity> e_cameracontroller = core->addEntity();
+	std::shared_ptr<CameraController> c_cameracontroller = e_cameracontroller->addComponent<CameraController>();
 
 	core->start();
 }

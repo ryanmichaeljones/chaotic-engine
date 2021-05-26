@@ -5,7 +5,7 @@ namespace engine
 {
 	void Shader::onLoad()
 	{
-		shader = getCore()->context->createShader();
+		shader = getCore()->getContext()->createShader();
 
 		std::ifstream shaderFile(getPath());
 		std::string sourceString(

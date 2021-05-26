@@ -32,8 +32,8 @@ namespace engine
 	{
 		// Default
 		setTexture(getCore()->getResources()->load<Texture>("../src/textures/missingtexture.jpg"));
-		setShader(getCore()->getResources()->load<Shader>("../src/shaders/texture.shader")); // add a missingshader.shader
-		setMesh(getCore()->getResources()->load<Mesh>("../src/models/cube.obj")); //add a missingobj.obj
+		setShader(getCore()->getResources()->load<Shader>("../src/shaders/texture.shader"));
+		setMesh(getCore()->getResources()->load<Mesh>("../src/models/cube.obj"));
 	}
 
 	void MeshRenderer::onRender()

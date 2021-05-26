@@ -5,7 +5,7 @@ namespace engine
 {
 	void Mesh::onLoad()
 	{
-		mesh = getCore()->context->createMesh();
+		mesh = getCore()->getContext()->createMesh();
 
 		std::ifstream f(getPath());
 		if (!f.is_open())

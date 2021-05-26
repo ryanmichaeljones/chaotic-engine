@@ -21,6 +21,7 @@ namespace engine
 		void onInitialize();
 		virtual void onTick();
 		virtual void onRender();
+
 		std::shared_ptr<Entity> getEntity();
 		std::shared_ptr<Core> getCore();
 		std::shared_ptr<Transform> getTransform();
